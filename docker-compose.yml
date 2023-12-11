@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: rm3641krmrm.
+      POSTGRES_USER: postgres
+      POSTGRES_DB: ListElement
+    ports:
+      - "5432:5432"
+
+  spring-app:
+    build:
+      context: ./back/demo
+      dockerfile: Dockerfile
+    container_name: parallelproject-1  # Adjust the container name
+    ports:
+      - "8070:8070"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ListElement  # Use the service name 'postgres' as the hostname
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: rm3641krmrm.
