@@ -21,4 +21,9 @@ public class ListElementServiceImpl implements ListElementService{
     public List<ListElement> getAllListElements() {
         return listElementRepository.findAll();
     }
+
+    @Override
+    public void deleteListElement(Long id) {
+        listElementRepository.deleteById(id.intValue());
+    }
 }

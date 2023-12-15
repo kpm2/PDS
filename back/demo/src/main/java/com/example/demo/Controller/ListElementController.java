@@ -25,4 +25,9 @@ public class ListElementController {
         return listElementService.getAllListElements();
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        listElementService.deleteListElement(id);
+        return "Element deleted successfully";
+    }
 }

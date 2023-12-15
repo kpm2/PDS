@@ -13,9 +13,10 @@ services:
 
   spring-app:
     build:
-      context: ./back
+      context: ./back/demo
       dockerfile: Dockerfile
     container_name: parallelproject-1  # Adjust the container name
+    restart: always
     ports:
       - "8070:8070"
     depends_on:
