@@ -4,20 +4,57 @@
 
 .App-flex {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Add some spacing between the input and button */
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #4CAF50; /* Change to your preferred header background color */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 1.5rem; /* Adjust the font size to your liking */
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Style the input and button for a cleaner look */
+#userInput {
+  padding: 10px;
+  font-size: 1rem;
+  margin-right: 10px; /* Add some spacing between the input and button */
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: #008CBA; /* Change to your preferred button color */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Add some styling for the list elements */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Style the delete and edit buttons */
+button.delete {
+  background-color: #FF5252; /* Change to your preferred delete button color */
+}
+
+button.edit {
+  background-color: #FFD740; /* Change to your preferred edit button color */
 }
 
