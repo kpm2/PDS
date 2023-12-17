@@ -5,6 +5,8 @@ import './App.css';
 function App() {
   const [listElements, setListElements] = useState([]);
   const [inputText, setInputText] = useState('');
+  const [editingElementId, setEditingElementId] = useState(null);
+  const [editText, setEditText] = useState('');
 
   const fetchListElements = async () => {
     try {
@@ -51,6 +53,32 @@ function App() {
     }
   };
 
+  const handleEditClick = (id, text) => {
+    setEditingElementId(id);
+    setEditText(text);
+  };
+  
+  const handleEditChange = (event) => {
+    setEditText(event.target.value);
+  };
+  
+  const handleUpdateClick = async (id) => {
+    if (editText.trim() !== '') {
+      try {
+        await fetch(`http://localhost:8070/listelement/update/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: editText })
+        });
+        fetchListElements();
+        setEditingElementId(null);
+        setEditText('');
+      } catch (error) {
+        console.error('Error during fetch:', error);
+      }
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -69,15 +97,33 @@ function App() {
         </div>
         <div>
           <ul>
-            {listElements.map((element) => (
-              <li key={element.id}>
-                {element.text}
-                &nbsp;
-                <button onClick={() => handleDeleteClick(element.id)}>
-                  Delete
-                </button>
-              </li>
-            ))}
+          {listElements.map((element) => (
+  <li key={element.id}>
+    {editingElementId === element.id ? (
+      <div>
+        <input
+          type="text"
+          value={editText}
+          onChange={handleEditChange}
+        />
+        <button onClick={() => handleUpdateClick(element.id)}>
+          Update
+        </button>
+      </div>
+    ) : (
+      <div>
+        {element.text}
+        &nbsp;
+        <button onClick={() => handleDeleteClick(element.id)}>
+          Delete
+        </button>
+        &nbsp;
+        <button onClick={() => handleEditClick(element.id, element.text)}>
+          Edit
+        </button>
+      </div>
+      )}
+    </li>))}
           </ul>
         </div>
       </header>

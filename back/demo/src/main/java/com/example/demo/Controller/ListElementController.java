@@ -30,4 +30,16 @@ public class ListElementController {
         listElementService.deleteListElement(id);
         return "Element deleted successfully";
     }
+
+    @PutMapping("/update/{id}")
+    public String update(@PathVariable Long id, @RequestBody ListElement updatedElement) {
+        ListElement existingElement = listElementService.getListElementById(id);
+        if (existingElement != null) {
+            existingElement.setText(updatedElement.getText());
+            listElementService.saveListElement(existingElement);
+            return "Element updated successfully";
+        } else {
+            return "Element not found";
+        }
+    }
 }
