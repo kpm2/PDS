@@ -25,3 +25,13 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ListElement  # Use the service name 'postgres' as the hostname
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: rm3641krmrm.
+
+
+  frontend:
+      build:
+        context: ./front/demo
+      container_name: frontend
+      ports:
+        - "3000:3000"
+      depends_on:
+        - spring-app
